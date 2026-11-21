@@ -26,6 +26,8 @@ def main() -> None:
     out_dir = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "entry.txt").write_text(ENTRY, encoding="utf-8")
+    if (out_dir / "entry.txt").read_text(encoding="utf-8") != ENTRY:
+        raise ValueError("entry.txt content mismatch after write")
 
 
 if __name__ == "__main__":
